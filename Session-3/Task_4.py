@@ -11,7 +11,7 @@ colors = ['Red','Blue','Green','Orange','Pink']
 
 plt.figure(figsize=(6,6))
 
-plt.bar(food_delivery_app, orders, color=colors, width=(0.8))
+plt.bar(food_delivery_app, orders, color=colors, width=(0.4))
 
 plt.title("Daily orders by Delivery app")
 plt.xlabel("Food Delivery App")
