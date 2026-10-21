@@ -1,0 +1,26 @@
+SCENARIO
+You are working on a reporting pipeline for a food delivery platform. You have a Pandas
+DataFrame with columns: order_id, restaurant_name, city, order_value,
+delivery_time_mins, and rating. A colleague proposes filtering the DataFrame in a
+for-loop once per restaurant and computing averages manually inside the loop.
+
+Question: Explain why groupby() combined with agg() is the correct approach instead of the
+for-loop strategy. Describe the specific method chain you would write to compute average order
+value, average delivery time, and average rating per restaurant in a single operation, and
+explain what the resulting DataFrame's index represents after the operation.
+
+Answer : 
+
+Using groupby() combined with agg() is more efficient and readable than using a for loop to filter the DataFrame for each restaurant and calculate averages manually. Pandas groups rows by restaurant and performs the required aggregations in a single operation, reducing repetitive code and improving performance.
+
+Method chain:
+result = df.groupby("restaurant_name").agg(
+    avg_order_value=("order_value", "mean"),
+    avg_delivery_time=("delivery_time_mins", "mean"),
+    avg_rating=("rating", "mean"))
+
+Here, groupby("restaurant_name") groups all orders belonging to the same restaurant, while agg() calculates the average order value, delivery time, and rating for each group simultaneously. Named aggregation also gives each output column a clear, meaningful name.
+
+Resulting DataFrame index: The index represents the unique restaurant names. Each row contains the average order value, average delivery time, and average rating for that restaurant. By default, groupby() uses the grouping column as the index and sorts the group keys alphabetically.
+
+This approach is concise, scalable, and easier to maintain than repeatedly filtering the DataFrame inside a Python loop.
